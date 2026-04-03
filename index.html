@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ankush — Web Developer</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a1a;
+      background: #ffffff;
+      line-height: 1.7;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Layout ── */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0; }
+
+    /* ── 1. NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0;
+    }
+    .nav-inner {
+      max-width: 1000px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-size: 18px; font-weight: 700; color: #0f6e56; }
+    .nav-links { display: flex; gap: 32px; font-size: 14px; color: #555; }
+    .nav-links a:hover { color: #0f6e56; }
+    .nav-cta {
+      background: #0f6e56; color: #fff;
+      padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #085041; }
+
+    /* ── 2. HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #f0faf6 0%, #e8f4ff 100%);
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: #e1f5ee; color: #0f6e56;
+      font-size: 13px; font-weight: 600; padding: 4px 14px;
+      border-radius: 999px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800; line-height: 1.2;
+      color: #111; margin-bottom: 16px;
+    }
+    .hero h1 span { color: #0f6e56; }
+    .hero p {
+      font-size: 18px; color: #555; max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #0f6e56; color: #fff;
+      padding: 14px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary:hover { background: #085041; transform: translateY(-1px); }
+    .btn-secondary {
+      background: #fff; color: #0f6e56;
+      border: 1.5px solid #0f6e56;
+      padding: 14px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: #f0faf6; }
+    .hero-skills {
+      margin-top: 48px;
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+    .skill-chip {
+      background: #fff; border: 1px solid #e0e0e0;
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 13px; color: #444;
+    }
+
+    /* ── 3. SOCIAL PROOF ── */
+    .stats { background: #0f6e56; padding: 48px 0; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px; text-align: center;
+    }
+    .stat-num { font-size: 36px; font-weight: 800; color: #fff; }
+    .stat-label { font-size: 14px; color: #9fe1cb; margin-top: 4px; }
+
+    /* ── 4. SERVICES ── */
+    .services { background: #f9f9f9; }
+    .section-title {
+      text-align: center; font-size: 30px; font-weight: 700;
+      color: #111; margin-bottom: 10px;
+    }
+    .section-sub {
+      text-align: center; font-size: 15px; color: #777; margin-bottom: 48px;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: #fff; border: 1px solid #e8e8e8; border-radius: 12px;
+      padding: 28px 24px; transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .service-card.featured { border: 2px solid #0f6e56; }
+    .service-icon { font-size: 28px; margin-bottom: 14px; }
+    .service-title { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 8px; }
+    .service-desc { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+    .service-price { font-size: 22px; font-weight: 800; color: #0f6e56; }
+    .service-features { list-style: none; margin-top: 12px; }
+    .service-features li {
+      font-size: 13px; color: #555; padding: 4px 0;
+    }
+    .service-features li::before { content: "✓ "; color: #0f6e56; font-weight: 700; }
+    .popular-badge {
+      display: inline-block; background: #0f6e56; color: #fff;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 999px; margin-bottom: 12px;
+    }
+
+    /* ── 5. PORTFOLIO ── */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      border: 1px solid #e8e8e8; border-radius: 12px; overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .project-thumb {
+      height: 180px; background: #e1f5ee;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #0f6e56; font-weight: 600;
+    }
+    .project-info { padding: 20px; }
+    .project-title { font-size: 16px; font-weight: 700; color: #111; margin-bottom: 6px; }
+    .project-desc { font-size: 13px; color: #666; margin-bottom: 12px; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      background: #f0faf6; color: #0f6e56; border: 1px solid #9fe1cb;
+      font-size: 11px; padding: 2px 10px; border-radius: 999px;
+    }
+
+    /* ── 6. TESTIMONIAL ── */
+    .testimonial { background: #f0faf6; }
+    .testimonial-card {
+      max-width: 680px; margin: 0 auto;
+      background: #fff; border: 1px solid #d4edde;
+      border-radius: 16px; padding: 36px 40px; text-align: center;
+    }
+    .testimonial-text {
+      font-size: 18px; color: #333; font-style: italic; line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .testimonial-author { font-size: 14px; font-weight: 700; color: #0f6e56; }
+    .testimonial-role { font-size: 13px; color: #888; margin-top: 2px; }
+    .stars { color: #f4b400; font-size: 20px; letter-spacing: 2px; margin-bottom: 16px; }
+
+    /* ── 7. CONTACT CTA ── */
+    .cta-section {
+      background: #111; text-align: center; padding: 80px 0;
+    }
+    .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .cta-section p { font-size: 16px; color: #aaa; margin-bottom: 32px; }
+    .cta-section .btn-primary { font-size: 16px; padding: 16px 36px; }
+
+    /* ── 8. FOOTER ── */
+    footer {
+      background: #0d0d0d; color: #666;
+      text-align: center; padding: 24px;
+      font-size: 13px;
+    }
+    footer a { color: #0f6e56; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 1. NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Ankush.dev</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#portfolio">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Hire me</a>
+  </div>
+</nav>
+
+<!-- 2. HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">Available for freelance work</div>
+    <h1>I build fast, clean<br/><span>websites that convert</span></h1>
+    <p>Landing pages, WordPress sites & web apps — delivered in 3 days or less.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start your project →</a>
+      <a href="#portfolio" class="btn-secondary">See my work</a>
+    </div>
+    <div class="hero-skills">
+      <span class="skill-chip">HTML / CSS</span>
+      <span class="skill-chip">JavaScript</span>
+      <span class="skill-chip">WordPress</span>
+      <span class="skill-chip">React</span>
+      <span class="skill-chip">Python</span>
+    </div>
+  </div>
+</section>
+
+<!-- 3. SOCIAL PROOF STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div>
+        <div class="stat-num">3 days</div>
+        <div class="stat-label">Average delivery time</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Client satisfaction</div>
+      </div>
+      <div>
+        <div class="stat-num">24hr</div>
+        <div class="stat-label">Response time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <h2 class="section-title">What I offer</h2>
+    <p class="section-sub">Simple pricing. No hidden charges. Quality guaranteed.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <div class="service-title">Landing Page</div>
+        <div class="service-desc">A fast, responsive one-page website to showcase your business or product.</div>
+        <div class="service-price">from $50</div>
+        <ul class="service-features">
+          <li>Mobile responsive</li>
+          <li>Contact form included</li>
+          <li>Delivered in 2 days</li>
+          <li>1 revision free</li>
+        </ul>
+      </div>
+
+      <div class="service-card featured">
+        <div class="popular-badge">Most Popular</div>
+        <div class="service-icon">⚡</div>
+        <div class="service-title">WordPress Website</div>
+        <div class="service-desc">A full multi-page website with CMS so you can update content yourself.</div>
+        <div class="service-price">from $100</div>
+        <ul class="service-features">
+          <li>Up to 5 pages</li>
+          <li>Admin panel (CMS)</li>
+          <li>SEO ready</li>
+          <li>Mobile responsive</li>
+          <li>3 revisions free</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛠️</div>
+        <div class="service-title">Custom Development</div>
+        <div class="service-desc">React apps, Python scripts, automation tools — let's discuss your needs.</div>
+        <div class="service-price">from $150</div>
+        <ul class="service-features">
+          <li>React / JavaScript</li>
+          <li>Python automation</li>
+          <li>API integration</li>
+          <li>Custom quote</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <h2 class="section-title">Recent work</h2>
+    <p class="section-sub">Sample projects showcasing my skills</p>
+    <div class="portfolio-grid">
+
+      <div class="project-card">
+        <div class="project-thumb">E-Commerece</div>
+        <div class="project-info">
+          <div class="project-title">ShopEasy</div>
+          <div class="project-desc">A clean landing page with menu, contact form and Google Maps embed.</div>
+          <div class="project-tags">
+            <a href="https://shopease-hub.vercel.app/" target="_blank" class="tag">View Project</a>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb" style="background:#e8f4ff;">All-in-oneFile Converters</div>
+        <div class="project-info">
+          <div class="project-title">All In One Docs Creator</div>
+          <div class="project-desc">5-page WordPress site built with Elementor, contact form & blog.</div>
+          <a href="https://all-in-one-docs-creator.vercel.app/" target="_blank" class="tag">View Project</a>
+          <div class="project-tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">Elementor</span>
+            <span class="tag">CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb" style="background:#faeeda;">Portfolio Website</div>
+        <div class="project-info">
+          <div class="project-title">Freelancer Portfolio</div>
+          <div class="project-desc">Custom portfolio site with dark mode, animations and contact form.</div>
+          <a href="https://my-portfolio-in-com.vercel.app/" target="_blank" class="tag">View Project</a>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 6. TESTIMONIAL -->
+<section class="testimonial">
+  <div class="container">
+    <h2 class="section-title">What clients say</h2>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-text">
+        "Delivered my website in just 2 days — exactly what I needed. The design was clean, the code was perfect, and communication was excellent throughout."
+      </div>
+      <div class="testimonial-author">Rahul Sharma</div>
+      <div class="testimonial-role">Small Business Owner, Delhi</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CONTACT CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2>Ready to start your project?</h2>
+    <p>Tell me what you need — I'll respond within 24 hours.</p>
+    <a href="https://www.upwork.com/freelancers/~01159ceb99c0af4768" target="_blank" class="btn-primary">
+      Hire me on Upwork →
+    </a>
+  </div>
+</section>
+
+<!-- 8. FOOTER -->
+<footer>
+  <p>© 2025 Ankush &nbsp;·&nbsp; Built with HTML & CSS &nbsp;·&nbsp;
+    <a href="https://www.upwork.com/freelancers/~01159ceb99c0af4768" target="_blank">Upwork Profile</a>
+  </p>
+</footer>
+
+</body>
+</html>
